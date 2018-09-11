@@ -47,8 +47,36 @@ def creerA(n):
         A.append(ligne)
     A=np.array(A)
     return A
-      
+
+def int_to_base_b(n,b):
+    T=[]
+    a=n
+    while a>0:
+        r=a%(b)
+        T=[r]+T
+        a=int(a/b)
+    return [0 for i in range(3-len(T))]+T
+        
     
+def creerA3(n):
+    A=[]
+    for Nbr_elec in range(3):
+        for nbr in range(n):
+        
+            ligne=[0. for i in range(n**3)]
+            #cette ligne teste la condition sur 
+            #la variable marginale 
+            #PI X,X,X,..,X,n,X,...,X 
+            #avec n en Nbr_elec-ieme position
+            #en sommant sur les autres X
+            for i in range(n*n*n):
+                if (int_to_base_b(i,n)[Nbr_elec]==nbr):
+                    ligne[i]=1.
+            A.append(ligne)
+    A=np.array(A)
+    return A
+                
+
 def creeraetb(a,b,n):
     d=np.zeros((2*n-1))
     for i in range(n):
